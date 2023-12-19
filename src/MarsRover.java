@@ -1,4 +1,5 @@
 import java.util.Scanner;
+
 // Enum for N;E;S;W 
 enum Direction {  
     N, E, S, W;  
@@ -12,7 +13,6 @@ enum Direction {
     // Calc to turn right - same principle  
     public Direction rotateRight() {  
         return values()[(ordinal() + 1) % 4]; 
-
     }  
 } 
 
@@ -92,8 +92,8 @@ public class MarsRover {
     }  
     // Check if a position is valid in the grid  
     private boolean validPosition(int x, int y) {  
-        int maxX = 5; // Border X-coordinate of the grid  
-        int maxY = 5; // Border Y-coordinate of the grid  
+        int maxX = 5; // Border X-coord of the plateau
+        int maxY = 5; // Border Y-coord of the plateau  
         return x >= 0 && x <= maxX && y >= 0 && y <= maxY;  
     }  
     // Method for the control centre of the rover
