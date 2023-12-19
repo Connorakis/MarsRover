@@ -54,7 +54,7 @@ public class MarsRover {
             x = nextX;  
             y = nextY; 
         } else {
-            System.out.println(nextPos + " is invalid.");
+            System.out.println("Position: " + nextPos + " is invalid. ");
         } 
     }  
     // Get the current position of the rover  
