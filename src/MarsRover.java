@@ -26,11 +26,11 @@ public class MarsRover {
         this.y = y;  
         this.dir = direction;  
     }  
-    // Rotate the rover  
+    // Rotate the rover depending on the command received 
     public void rotate(char rotation) {   
         dir = (rotation == 'L') ? dir.rotateLeft() : dir.rotateRight(); 
     }  
-    // Move the rover  
+    // Move the rover if the move has been validated
     public void move() {  
         int nextX = x;  
         int nextY = y;  
@@ -54,9 +54,38 @@ public class MarsRover {
             x = nextX;  
             y = nextY; 
         } else {
-            System.out.println("Position: " + nextPos + " is invalid. "); 
+            System.out.println("Position: " + nextPos + " is not a reachable point on the plateau."); 
         } 
     }  
+    // Method for the scanner that receives user input in the console
+    public static String inputScanner() {
+        Scanner uInput = new Scanner(System.in);
+        String input = uInput.nextLine();
+        return input;
+    }
+    // Method that validates the user input for the x y coordinates
+    public static String uValidateCoord(String input) {
+        if (Integer.parseInt(input) >= 0 && Integer.parseInt(input) <= 5) {  
+                
+        } else {  
+            System.out.println("This is not a valid position on the plateau. The plateau ranges from 0:0 - 5:5."); 
+            System.exit(0);
+        }
+        return input;
+    }
+    // Method that validates the rover command string
+    public static String uValidateCommand(String input) {
+        String temp = input;
+        for (char order : temp.toCharArray()) {  
+            if (order == 'L' || order == 'R' || order == 'M') {  
+                
+            } else {  
+                System.out.println("This is not a valid command string for the rover. A valid command string consists only of 'L', 'R' and 'M'"); 
+                System.exit(0);
+            }
+        }         
+        return input;
+    }
     // Get the current position of the rover  
     public String getPos() {  
         return x + " " + y + " " + dir;  
@@ -67,7 +96,9 @@ public class MarsRover {
         int maxY = 5; // Border Y-coordinate of the grid  
         return x >= 0 && x <= maxX && y >= 0 && y <= maxY;  
     }  
-    // Control centre for the rover  
+    // Method for the control centre of the rover
+    // The method splits the received command string into an array of char and loops
+    // Through it to execute specific orders
     public static void commandCentre(MarsRover rover, String commandString) {
         String controlSequence = commandString;  
         for (char order : controlSequence.toCharArray()) {  
@@ -79,21 +110,15 @@ public class MarsRover {
         } 
     }; 
     public static void main(String[] args) { 
-        // Create a Scanner object to receive input
-        Scanner uIn = new Scanner(System.in);
-        Scanner uIn2 = new Scanner(System.in);
         // Create a rover object 
-        MarsRover rover1 = new MarsRover(uIn.nextInt(), uIn.nextInt(), Direction.N);  
-        commandCentre(rover1, uIn2.nextLine());
+        MarsRover rover1 = new MarsRover(Integer.parseInt(uValidateCoord(inputScanner())), Integer.parseInt(uValidateCoord(inputScanner())), Direction.N);  
+        commandCentre(rover1, uValidateCommand(inputScanner()));
         // Print rover1 final position 
         System.out.println("------------------" + '\n' + "Rover 1 Final Position: " + rover1.getPos() + "\n" + "------------------"); 
         // Second rover object
-        MarsRover rover2 = new MarsRover(uIn.nextInt(), uIn.nextInt(), Direction.E); 
-        commandCentre(rover2, uIn2.nextLine());
+        MarsRover rover2 = new MarsRover(Integer.parseInt(uValidateCoord(inputScanner())), Integer.parseInt(uValidateCoord(inputScanner())), Direction.E); 
+        commandCentre(rover2, uValidateCommand(inputScanner()));
         // Print rover2 final position 
         System.out.println("------------------" + '\n' + "Rover 2 Final Position: " + rover2.getPos() + "\n" + "------------------"); 
-        // Close the scannners
-        uIn.close();
-        uIn2.close(); 
     }  
 }  
