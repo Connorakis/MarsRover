@@ -48,13 +48,13 @@ public class MarsRover {
                 nextX--;  
                 break;  
         }  
-        // Check for previously visited tiles and upcoming border tiles  
+        // Check for upcoming border tiles  
         String nextPos = nextX + " " + nextY;  
         if (validPosition(nextX, nextY)) {  
             x = nextX;  
             y = nextY; 
         } else {
-            System.out.println("Position: " + nextPos + " is invalid. ");
+            System.out.println("Position: " + nextPos + " is invalid. "); 
         } 
     }  
     // Get the current position of the rover  
