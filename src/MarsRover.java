@@ -19,22 +19,22 @@ enum Direction {
 public class MarsRover {  
     private int x;  
     private int y;  
-    private Direction direction; 
+    private Direction dir; 
     // Constructor
     public MarsRover(int x, int y, Direction direction) {  
         this.x = x;  
         this.y = y;  
-        this.direction = direction;  
+        this.dir = direction;  
     }  
     // Rotate the rover  
     public void rotate(char rotation) {   
-        direction = (rotation == 'L') ? direction.rotateLeft() : direction.rotateRight(); 
+        dir = (rotation == 'L') ? dir.rotateLeft() : dir.rotateRight(); 
     }  
     // Move the rover  
     public void move() {  
         int nextX = x;  
         int nextY = y;  
-        switch (direction) { 
+        switch (dir) { 
             case N:  
                 nextY++;  
                 break;  
@@ -57,16 +57,15 @@ public class MarsRover {
             System.out.println(nextPos + " is invalid.");
         } 
     }  
+    // Get the current position of the rover  
+    public String getPos() {  
+        return x + " " + y + " " + dir;  
+    }  
     // Check if a position is valid in the grid  
     private boolean validPosition(int x, int y) {  
         int maxX = 5; // Border X-coordinate of the grid  
         int maxY = 5; // Border Y-coordinate of the grid  
         return x >= 0 && x <= maxX && y >= 0 && y <= maxY;  
-    }  
-
-    // Get the current position of the rover  
-    public String getPos() {  
-        return x + " " + y + " " + direction;  
     }  
     // Control centre for the rover  
     public static void commandCentre(MarsRover rover, String commandString) {
